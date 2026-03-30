@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THOR Electronics - Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">THOR Electronics</h1>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="products.html" class="active">Productos</a></li>
+                    <li><a href="cart.html">Carrito</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="main-content">
+        <section class="products-section">
+            <div class="container">
+                <h2>Nuestros Productos</h2>
+                
+                <!-- Filtros -->
+                <div class="filters">
+                    <select id="category-filter">
+                        <option value="all">Todas las categorías</option>
+                        <option value="laptops">Laptops</option>
+                        <option value="smartphones">Smartphones</option>
+                        <option value="accessories">Accesorios</option>
+                    </select>
+                </div>
+
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="images/laptop.jpg.jpg" alt="Laptop Gaming X1">
+                        <h3>Laptop Gaming X1</h3>
+                        <p class="description">Procesador Intel i7, 16GB RAM, 512GB SSD</p>
+                        <p class="price">S/ 2,299.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Laptop Gaming X1', 1299.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/smartphone.png" alt="Smartphone Pro Max">
+                        <h3>Smartphone Pro Max</h3>
+                        <p class="description">256GB, Cámara 108MP, 5G</p>
+                        <p class="price">S/ 899.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Smartphone Pro Max', 899.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/headphones.jpg" alt="Headphones Wireless">
+                        <h3>Headphones Wireless</h3>
+                        <p class="description">Cancelación de ruido, 30h batería</p>
+                        <p class="price">S/ 199.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Headphones Wireless', 199.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/tablet1.jpg" alt="Tablet Pro">
+                        <h3>Tablet Pro</h3>
+                        <p class="description">10.5 pulgadas, 128GB, Stylus incluido</p>
+                        <p class="price">S/ 549.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Tablet Pro', 549.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/smartwatch1.jpg" alt="Smartwatch Elite">
+                        <h3>Smartwatch Elite</h3>
+                        <p class="description">GPS, Monitor cardíaco, Resistente al agua</p>
+                        <p class="price">S/ 299.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Smartwatch Elite', 299.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/camera1.jpg" alt="Cámara DSLR">
+                        <h3>Cámara Canon Pro</h3>
+                        <p class="description">24MP, 4K Video, Lente 18-55mm</p>
+                        <p class="price">S/ 799.00</p>
+                        <button class="btn-add-cart" onclick="addToCart('Cámara DSLR Pro', 799.00)">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 THOR Electronics. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        function addToCart(productName, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: price, quantity: 1 });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + ' agregado al carrito!');
+        }
+    </script>
+</body>
+</html>

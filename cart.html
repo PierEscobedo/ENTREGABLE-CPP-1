@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THOR Electronics - Carrito</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">THOR Electronics</h1>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="products.html">Productos</a></li>
+                    <li><a href="cart.html" class="active">Carrito</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="main-content">
+        <section class="cart-section">
+            <div class="container">
+                <h2>Carrito de Compras</h2>
+
+               
+                <div class="cart-items" id="cart-items">
+                    <div class="cart-item">
+                        <span class="item-name">Laptop Gaming X1</span>
+                        <span class="item-quantity">Cantidad: 1</span>
+                        <span class="item-price">S/ 3,299.00</span>
+                    </div>
+                    <div class="cart-item">
+                        <span class="item-name">Headphones Wireless</span>
+                        <span class="item-quantity">Cantidad: 1</span>
+                        <span class="item-price">S/ 199.00</span>
+                    </div>
+                </div>
+
+                
+                <div class="cart-total">
+                    <h3>Total: <span id="total-amount">S/ 1,498.00</span></h3>
+                </div>
+
+                
+                <div class="checkout-form">
+                    <h3>Información de Envío</h3>
+                    <form id="checkout-form" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Teléfono:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Dirección de Envío:</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">Ciudad:</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment">Método de Pago:</label>
+                            <select id="payment" name="payment" required>
+                                <option value="">Seleccione...</option>
+                                <option value="card">Tarjeta de Crédito/Débito</option>
+                                <option value="transfer">Transferencia Bancaria</option>
+                                <option value="cash">Pago Contra Entrega</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-checkout">
+                            Realizar Compra
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 THOR Electronics. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let totalAmount = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">El carrito está vacío</p>';
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(function(item, index) {
+                    let itemTotal = item.price * item.quantity;
+                    totalAmount += itemTotal;
+                    
+                    let itemHTML = `
+                        <div class="cart-item">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-quantity">Cantidad: ${item.quantity}</span>
+                            <span class="item-price">$${itemTotal.toFixed(2)}</span>
+                            <button class="btn-remove" onclick="removeFromCart(${index})">Eliminar</button>
+                        </div>
+                    `;
+                    cartItemsContainer.innerHTML += itemHTML;
+                });
+                
+                document.getElementById('total-amount').textContent = '$' + totalAmount.toFixed(2);
+            }
+        });
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            location.reload();
+        }
+
+        
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Compra realizada con éxito! Gracias por su compra.');
+            localStorage.removeItem('cart');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
